@@ -1,1 +1,17 @@
-<p>app-stream works!</p>
+<div [ngStyle]="style" [style.visibility]="streamReady ? 'visible' : 'hidden'" id="main-div" (focus)="onFocus.emit()"
+    (blur)="onBlur.emit()">
+    <div id="aspect-ratio-div" style="position: relative; padding-bottom: 56.25%;" (focus)="onFocus.emit()"
+        (blur)="onBlur.emit()" tabindex="0">
+        <ng-container *ngIf="streamConfig.source === 'gfn'">
+            <div id="view"
+                style="background-color: #dddddd; display: flex; justify-content: space-between; width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+            </div>
+        </ng-container>
+        <ng-container *ngIf="streamConfig.source === 'local'">
+            <video #remoteVideo id="remote-video" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"
+                autoplay muted playsinline tabindex="-1"></video>
+            <audio id="remote-audio" muted></audio>
+            <h3 #messageDisplay id="message-display" style="visibility: hidden">...</h3>
+        </ng-container>
+    </div>
+</div>
